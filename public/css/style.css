@@ -1,0 +1,63 @@
+
+
+
+.sidebar {
+
+    width: 260px;
+
+    min-height: 100vh;
+
+    background:black;
+
+    color: white;
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+}
+
+.logo {
+
+    text-align: center;
+
+    padding: 20px;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    border-bottom: 1px solid #2c2f38;
+}
+
+.sidebar ul {
+
+    list-style: none;
+
+    padding: 0;
+}
+
+.sidebar ul li {
+
+    border-bottom: 1px solid #2c2f38;
+}
+
+.sidebar ul li a {
+
+    display: block;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 18px;
+
+    transition: .3s;
+}
+
+.sidebar ul li a:hover {
+
+    background:#667eea;
+
+}

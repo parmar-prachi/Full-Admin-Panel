@@ -1,0 +1,134 @@
+<%- include('header') %>
+    <div style=" background-color: #1e1e2f;">
+
+        <%- include('sidebar') %>
+            <div class="main-content-wrapper" id="mainContent">
+
+                <%- include('navbar') %>
+
+                    <div class="row justify-content-center mt-4">
+
+                        <div class="col-lg-8">
+
+                            <div class="card border-0 shadow-sm"
+                                style="border-radius: 12px; background-color: #1e1e2f;">
+
+                                <!-- CARD HEADER -->
+                                <div class="card-header  border-0 pt-4 px-4">
+                                    <h4 class="mb-0 font-weight-bold text-white">Edit User</h4>
+                                    <p class=" small mb-0 text-white">Update user information</p>
+                                </div>
+
+                                <!-- CARD BODY -->
+                                <div class="card-body px-4 py-4">
+
+                                    <form action="/users/update/<%= user._id %>" method="POST"
+                                        enctype="multipart/form-data">
+
+                                        <div class="row">
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label text-white">First Name</label>
+                                                <input type="text" class="form-control" name="firstName"
+                                                    value="<%= user.firstName %>" required>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label text-white">Last Name</label>
+                                                <input type="text" class="form-control" name="lastName"
+                                                    value="<%= user.lastName %>" required>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label text-white">Email</label>
+                                            <input type="email" class="form-control" name="email"
+                                                value="<%= user.email %>" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label text-white">Mobile</label>
+                                            <input type="text" class="form-control" name="mobile"
+                                                value="<%= user.mobile %>" required>
+                                        </div>
+                                        <div class=" mb-3">
+                                            <label class="font-weight-500 text-white small">Gender</label>
+                                            <select name="gender" class="form-control custom-input">
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                                <option>Other</option>
+                                            </select>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label text-white">Current Image</label><br>
+                                            <img src="/uploads/users/<%= user.image %>" width="120"
+                                                class="rounded shadow-sm mt-2">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Change Image</label>
+                                            <input type="file" class="form-control" name="image">
+                                        </div>
+
+
+                                        <!-- BUTTON -->
+                                        <div class="text-end mt-4">
+                                            <button class="btn text-white px-4"
+                                                style="background-color: #6c5dd3; border-radius: 10px; font-weight: 500;">
+                                                Update User
+                                            </button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            </div>
+
+            <style>
+                .main-content-wrapper {
+                    margin-left: 260px;
+
+                    min-height: 100vh;
+                    padding: 30px;
+                    transition: all 0.3s ease-in-out;
+                }
+
+
+                .custom-input {
+                    background-color: #1e1e2f !important;
+                    border: 1px solid #5c5780 !important;
+                    border-radius: 10px !important;
+                    padding: 10px 14px !important;
+                    height: auto !important;
+                    color: white !important;
+                    transition: all 0.2s ease-in-out !important;
+                }
+
+                .custom-input:focus {
+                    background-color: #1e1e2f !important;
+                    border-color: #6c5dd3 !important;
+                    box-shadow: 0 0 0 3px rgba(108, 93, 211, 0.15) !important;
+                }
+
+                .sidebar.collapsed {
+                    transform: translateX(-260px);
+                    margin-right: -260px;
+                }
+
+                .main-content-wrapper.expanded {
+                    margin-left: 0px;
+                }
+
+                .font-weight-500 {
+                    font-weight: 500;
+                }
+            </style>

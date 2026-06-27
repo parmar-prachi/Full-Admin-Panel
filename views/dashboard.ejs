@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <!-- Bootstrap (IMPORTANT) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #1e1e2f;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR FIXED */
+        .sidebar {
+            width: 260px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 1000;
+        }
+
+        /* MAIN CONTENT SHIFT */
+        .main-content-wrapper {
+            margin-left: 260px;
+            padding: 30px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: none;
+            padding: 22px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <%- include('sidebar') %>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content-wrapper">
+
+            <!-- NAVBAR -->
+            <%- include('navbar') %>
+
+                <!-- STATS CARDS -->
+                <div class="row mb-4 mt-3">
+
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted text-uppercase small font-weight-bold">Total Registered</h6>
+                                <h2 class="font-weight-bold mb-0">
+                                    <%= typeof totalUsers !=='undefined' ? totalUsers : 1250 %>
+                                </h2>
+                            </div>
+                            <span class="h3 mb-0 text-primary">📊</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted text-uppercase small font-weight-bold">Active Users</h6>
+                                <h2 class="font-weight-bold mb-0 text-success">
+                                    <%= typeof activeUsers !=='undefined' ? activeUsers : 980 %>
+                                </h2>
+                            </div>
+                            <span class="h3 mb-0 text-success">🟢</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted text-uppercase small font-weight-bold">Inactive Users</h6>
+                                <h2 class="font-weight-bold mb-0 text-danger">
+                                    <%= typeof inactiveUsers !=='undefined' ? inactiveUsers : 270 %>
+                                </h2>
+                            </div>
+                            <span class="h3 mb-0 text-danger">🔴</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted text-uppercase small font-weight-bold">Male Users</h6>
+                                <h2 class="font-weight-bold mb-0 text-warning">
+                                    <%= typeof maleUsers !=='undefined' ? maleUsers : 270 %>
+                                </h2>
+                            </div>
+                            <span class="h3 mb-0 text-danger">👨🏻</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted text-uppercase small font-weight-bold">Female Users</h6>
+                                <h2 class="font-weight-bold mb-0 text-primary">
+                                    <%= typeof femaleUsers !=='undefined' ? femaleUsers : 270 %>
+                                </h2>
+                            </div>
+                            <span class="h3 mb-0 text-danger">👩🏻</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHART SECTION -->
+                <div class="row">
+
+                    <div class="col-lg-8 mb-4">
+                        <div class="card p-4 border-0 shadow-sm" style="border-radius: 12px;">
+                            <h5 class="font-weight-bold mb-3">User Growth Trend</h5>
+                            <canvas id="lineChart" style="max-height: 320px;"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mb-4">
+                        <div class="card p-4 border-0 shadow-sm" style="border-radius: 12px;">
+                            <h5 class="font-weight-bold mb-3">User Status</h5>
+                            <canvas id="pieChart" style="max-height: 320px;"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+        </div>
+
+        <!-- CHART JS -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+            new Chart(document.getElementById('lineChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+                    datasets: [{
+                        label: 'Users',
+                        data: [100, 300, 500, 800],
+                        borderColor: '#6c5dd3',
+                        tension: 0.4
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById('pieChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Active', 'Inactive'],
+                    datasets: [{
+                        data: [980, 270],
+                        backgroundColor: ['#28a745', '#dc3545']
+                    }]
+                }
+            });
+        </script>
+
+</body>
+
+</html>

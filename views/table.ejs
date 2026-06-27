@@ -1,0 +1,281 @@
+<%- include('header') %> 
+
+
+    <div class="d-flex w-100" style="min-height: 100vh; background-color: #1e1e2f;">
+
+
+        <%- include('sidebar') %>
+
+
+            <div class="main-content-wrapper flex-grow-1" id="mainContent">
+
+                <%- include('navbar') %>
+
+                    <div class="container-fluid py-4">
+
+
+                        <div class="card border-0 shadow-lg" style="border-radius: 16px; background-color: #27293d;">
+
+                            <!-- Card Header -->
+                            <div
+                                class="card-header border-0 d-flex justify-content-between align-items-center pt-4 px-4 bg-transparent">
+                                <div>
+                                    <h4 class="font-weight-bold text-white mb-1">User Management Hub</h4>
+                                    <p class="text-muted small mb-0">Browse system logs, view profiles, or update
+                                        credentials instantly.</p>
+                                </div>
+
+                                <a href="/users/add" class="btn add-btn px-4 d-flex align-items-center gap-2">
+                                    <i class="bi bi-plus-circle-fill"></i> Add User
+                                </a>
+                            </div>
+
+                            <!-- Table Content Container -->
+                            <div class="card-body px-4 pb-4 pt-2">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle custom-dark-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-0">Avatar</th>
+                                                <th class="border-0">Full Name</th>
+                                                <th class="border-0">Email</th>
+                                                <th class="border-0">Mobile</th>
+                                                <th class="border-0">City</th>
+                                                <th class="border-0">Status</th>
+                                                <th class="border-0 text-end pe-4">Action Options</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <% if(users.length> 0){ %>
+                                                <% users.forEach(user=> { %>
+                                                    <tr>
+                                                        <!-- Image/Avatar Field -->
+                                                        <td>
+                                                            <div class="avatar-container">
+                                                                <img src="/uploads/users/<%= user.image %>"
+                                                                    class="rounded-circle custom-avatar"
+                                                                    alt="User Avatar"
+                                                                    onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png';">
+                                                            </div>
+                                                        </td>
+
+                                                        <!-- Name Field -->
+                                                        <td class="text-dark font-weight-500">
+                                                            <%= (user.firstName || "" ) + " " + (user.lastName || "" )
+                                                                %>
+                                                        </td>
+
+                                                        <!-- Email Field -->
+                                                        <td class="text-dark">
+                                                            <%= user.email %>
+                                                        </td>
+
+                                                        <!-- Mobile Field -->
+                                                        <td class="text-dark">
+                                                            <%= user.mobile || '—' %>
+                                                        </td>
+
+                                                        <!-- City Field -->
+                                                        <td class="text-dark">
+                                                            <%= user.city || '—' %>
+                                                        </td>
+
+                                                        <!-- Status Badge Field -->
+                                                        <td>
+                                                            <% if(user.status=="Active" ){ %>
+                                                                <span class="badge custom-badge-success">Active</span>
+                                                                <% } else { %>
+                                                                    <span
+                                                                        class="badge custom-badge-danger">Inactive</span>
+                                                                    <% } %>
+                                                        </td>
+
+                                                        <!-- Interactive Actions Field -->
+                                                        <td>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-end gap-2 pe-3">
+                                                                <!-- View -->
+                                                                <a href="/users/<%= user._id %>"
+                                                                    class="btn btn-action btn-action-info"
+                                                                    title="View Profile">
+                                                                    <i class="bi bi-eye"></i>
+                                                                </a>
+
+                                                                <!-- Edit -->
+                                                                <a href="/users/edit/<%= user._id %>"
+                                                                    class="btn btn-action btn-action-warning"
+                                                                    title="Edit Entry">
+                                                                    <i class="bi bi-pencil-square"></i>
+                                                                </a>
+
+                                                                <!-- Delete -->
+                                                                <a href="/users/delete/<%= user._id %>"
+                                                                    class="btn btn-action btn-action-danger"
+                                                                    onclick="return confirm('Are you sure you want to remove this user from the records?')"
+                                                                    title="Delete Record">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <tr>
+                                                                <td colspan="7" class="text-center py-5 text-muted">
+                                                                    <i class="bi bi-folder-x d-block mb-2"
+                                                                        style="font-size: 2rem; color: #6c5dd3;"></i>
+                                                                    No registered users found in the framework database
+                                                                    index.
+                                                                </td>
+                                                            </tr>
+                                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+    </div>
+
+
+    <style>
+
+        .main-content-wrapper {
+            margin-left: 260px;
+            min-height: 100vh;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .add-btn {
+            background: #6c5dd3;
+            border: none;
+            color: white !important;
+            border-radius: 10px;
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .add-btn:hover {
+            background: #5b4eb8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(108, 93, 211, 0.3);
+        }
+
+
+        .custom-dark-table {
+            margin-bottom: 0;
+        }
+
+        .custom-dark-table thead tr th {
+            background-color: #1f2031 !important;
+            color: #9a9a9a !important;
+            font-size: 0.8rem;
+            text-uppercase: uppercase;
+            letter-spacing: 0.6px;
+            padding: 14px 16px;
+            font-weight: 600;
+        }
+
+        .custom-dark-table tbody tr {
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #2f3149;
+        }
+
+        .custom-dark-table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.02) !important;
+        }
+
+        .custom-dark-table tbody td {
+            padding: 14px 16px;
+            border: none;
+        }
+
+
+        .custom-avatar {
+            width: 44px;
+            height: 44px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-muted-light {
+            color: #b3b3cc !important;
+            font-size: 0.9rem;
+        }
+
+        /* Modern Pill Status Badges styles */
+        .custom-badge-success {
+            background-color: rgba(0, 242, 194, 0.301) !important;
+            color: #118971 !important;
+            border: 1px solid rgba(0, 242, 195, 0.25);
+            padding: 6px 12px !important;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        .custom-badge-danger {
+            background-color: rgba(253, 93, 147, 0.15) !important;
+            color: #fd5d93 !important;
+            border: 1px solid rgba(253, 93, 147, 0.25);
+            padding: 6px 12px !important;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        /* Minimalist Action Buttons Layout adjustments */
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-action-info {
+            background-color: rgba(29, 140, 248, 0.15);
+            color: #1d8cf8 !important;
+        }
+
+        .btn-action-info:hover {
+            background-color: #1d8cf8;
+            color: white !important;
+        }
+
+        .btn-action-warning {
+            background-color: rgba(255, 141, 114, 0.15);
+            color: #ff8d72 !important;
+        }
+
+        .btn-action-warning:hover {
+            background-color: #ff8d72;
+            color: white !important;
+        }
+
+        .btn-action-danger {
+            background-color: rgba(253, 93, 147, 0.15);
+            color: #fd5d93 !important;
+        }
+
+        .btn-action-danger:hover {
+            background-color: #fd5d93;
+            color: white !important;
+        }
+
+        .font-weight-500 {
+            font-weight: 500;
+        }
+    </style>
+
+    
+
+
+ 

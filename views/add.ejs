@@ -1,0 +1,234 @@
+<%- include('header') %>
+    <div class="d-flex w-100" style="min-height: 100vh; background-color: #1e1e2f;">
+
+    <div class="d-flex w-100" style="min-height: 100vh;">
+
+        <%- include('sidebar') %>
+
+            <div class="main-content-wrapper flex-grow-1" id="mainContent">
+
+                <%- include('navbar') %>
+
+                    <div class="container-fluid py-4">
+
+                            <div class="card-header  border-0 pt-4 px-4">
+                                <h4 class="font-weight-bold text-white mb-2">
+                                    <span style="color: #6c5dd3; margin-right: 8px;">➕</span> Add New User
+                                </h4>
+                                <p class="text-white small mb-0">Fill out all system parameters and credentials below to
+                                    register the user record.</p>
+                            </div>
+
+                            <div class="card-body p-4">
+                                <form action="/users/add" method="POST" enctype="multipart/form-data">
+
+                                    <h6 class="text-uppercase tracking-wider font-weight-bold mb-3"
+                                        style="color: #6c5dd3; font-size: 0.8rem; letter-spacing: 0.5px;">
+                                        Account Credentials
+                                    </h6>
+
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="font-weight-500 text-secondary small">First Name</label>
+                                            <input type="text" name="firstName" class="form-control custom-input"
+                                                value="<%= typeof user !== 'undefined' && user.firstName ? user.firstName : '' %>"
+                                                required>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Last Name</label>
+                                            <input type="text" name="lastName" class="form-control custom-input"
+                                                value="<%= typeof user !== 'undefined' && user.lastName ? user.lastName : '' %>"
+                                                required>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Username</label>
+                                            <input type="text" name="username" class="form-control custom-input"
+                                                value="<%= typeof user !== 'undefined' && user.username ? user.username : '' %>"
+                                                required>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Email</label>
+                                            <input type="email" name="email" class="form-control custom-input"
+                                                value="<%= typeof user !== 'undefined' && user.email ? user.email : '' %>"
+                                                required>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Password</label>
+                                            <input type="password" name="password" class="form-control custom-input"
+                                                value="<%= typeof user !== 'undefined' && user.password ? user.password : '' %>"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4" style="border-color: #f1f1f5;">
+
+                                    <h6 class="text-uppercase tracking-wider font-weight-bold mb-3"
+                                        style="color: #6c5dd3; font-size: 0.8rem; letter-spacing: 0.5px;">
+                                        Personal Details
+                                    </h6>
+
+                                    <div class="row mb-4">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Mobile</label>
+                                            <input type="text" name="mobile" class="form-control custom-input">
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Gender</label>
+                                            <select name="gender" class="form-control custom-input">
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Date of Birth</label>
+                                            <input type="date" name="dob" class="form-control custom-input">
+                                        </div>
+
+                                        <div class="col-md-2 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Age</label>
+                                            <input type="number" name="age" class="form-control custom-input" min="0">
+                                        </div>
+
+                                        <div class="col-md-12 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Hobbies</label>
+                                            <input type="text" name="hobbies" class="form-control custom-input"
+                                                placeholder="cricket, music, travel">
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4" style="border-color: #f1f1f5;">
+
+                                    <h6 class="text-uppercase tracking-wider font-weight-bold mb-3"
+                                        style="color: #6c5dd3; font-size: 0.8rem; letter-spacing: 0.5px;">
+                                        Address & Placement
+                                    </h6>
+
+                                    <div class="row mb-4">
+                                        <div class="col-md-12 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Address</label>
+                                            <textarea name="address" rows="3" class="form-control custom-input"
+                                                placeholder="Full postal address..."></textarea>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="font-weight-500 text-secondary small">City</label>
+                                            <input type="text" name="city" class="form-control custom-input">
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="font-weight-500 text-secondary small">State</label>
+                                            <input type="text" name="state" class="form-control custom-input">
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Pincode</label>
+                                            <input type="text" name="pincode" class="form-control custom-input">
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4" style="border-color: #f1f1f5;">
+
+                                    <h6 class="text-uppercase tracking-wider font-weight-bold mb-3"
+                                        style="color: #6c5dd3; font-size: 0.8rem; letter-spacing: 0.5px;">
+                                        Professional Info & Settings
+                                    </h6>
+
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Education</label>
+                                            <input type="text" name="education" class="form-control custom-input">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Occupation</label>
+                                            <input type="text" name="occupation" class="form-control custom-input">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Joining Date</label>
+                                            <input type="date" name="joiningDate" class="form-control custom-input">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="font-weight-500 text-secondary small">Status</label>
+                                            <select name="status" class="form-control custom-input">
+                                                <option>Active</option>
+                                                <option>Inactive</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-12 mb-4">
+                                            <label class="font-weight-500 text-secondary small">Profile Image</label>
+                                            <div class="p-3 style-file-zone"
+                                                style="border: 2px dashed #e4e4e4; background: #f8f9fa; border-radius: 10px;">
+                                                <input type="file" name="image" class="form-control-file">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-end mt-4" style="gap: 12px;">
+                                        <a href="/users" class="btn btn-light px-4"
+                                            style="border-radius: 10px; font-weight: 500;">Cancel</a>
+                                        <button type="submit" class="btn text-white px-5 shadow-sm"
+                                            style="background-color: #6c5dd3; border-radius: 10px; font-weight: 500;">
+                                            <i class="fa-solid fa-save mr-2"></i> Save User
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+
+    <style>
+        
+
+
+        .main-content-wrapper {
+            margin-left: 260px;
+
+            min-height: 100vh;
+            padding: 30px;
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        .custom-input {
+            background-color: #1e1e2f !important;
+            border: 1px solid #5c5780 !important;
+            border-radius: 10px !important;
+            padding: 10px 14px !important;
+            height: auto !important;
+            color: white !important;
+            transition: all 0.2s ease-in-out !important;
+        }
+
+        .custom-input:focus {
+            background-color: #1e1e2f !important;
+            border-color: #6c5dd3 !important;
+            box-shadow: 0 0 0 3px rgba(108, 93, 211, 0.15) !important;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-260px);
+            margin-right: -260px;
+        }
+
+        .main-content-wrapper.expanded {
+            margin-left: 0px;
+        }
+
+        .font-weight-500 {
+            font-weight: 500;
+        }
+    </style>
+

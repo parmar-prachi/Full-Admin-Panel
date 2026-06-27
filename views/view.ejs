@@ -1,0 +1,333 @@
+<%- include('header') %> 
+
+    <div class="d-flex w-100" style="min-height: 100vh; background-color: #1e1e2f;">
+
+        <%- include('sidebar') %>
+
+
+            <div class="main-content-wrapper flex-grow-1" id="mainContent">
+
+                <%- include('navbar') %>
+
+                    <div class="container-fluid py-5">
+
+                        <div class="row justify-content-center">
+
+                            <div class="col-xl-10">
+
+
+                                <div class="card border-0 shadow-lg position-relative overflow-hidden"
+                                    style="border-radius: 20px; background-color: #27293d;">
+
+
+                                    <div
+                                        style="position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, #6c5dd3, #fd5d93);">
+                                    </div>
+
+                                    <div class="card-body p-4 p-md-5">
+
+
+                                        <div class="text-center mb-5">
+                                            <div class="position-relative d-inline-block mb-3">
+                                                <img src="/uploads/users/<%= user.image %>"
+                                                    class="rounded-circle shadow-lg" width="140" height="140"
+                                                    style="object-fit: cover; border: 4px solid rgba(108, 93, 211, 0.25);"
+                                                    onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png';">
+                                            </div>
+
+                                            <h2 class="text-white font-weight-bold mb-1">
+                                                <%= user.firstName %>
+                                                    <%= user.lastName %>
+                                            </h2>
+
+                                            <p class="text-muted mb-3"
+                                                style="font-size: 1.05rem; letter-spacing: 0.5px;">
+                                                @<%= user.username %>
+                                            </p>
+
+                                            <% if (user.status==="Active" ) { %>
+                                                <span class="badge custom-profile-badge-success">Active Status</span>
+                                                <% } else { %>
+                                                    <span class="badge custom-profile-badge-danger">Inactive
+                                                        Status</span>
+                                                    <% } %>
+                                        </div>
+
+                                        <hr style="border-color: rgba(255, 255, 255, 0.08);" class="my-5">
+
+                                        <!-- Details Matrix Grid Layout -->
+                                        <div class="row text-start px-lg-3">
+
+                                            <!-- Grid Field Card Item -->
+                                            <div class="col-md-6 mb-4">
+                                                <div class="meta-field-box">
+                                                    <div class="icon-avatar-tint info-tint"><i
+                                                            class="bi bi-envelope"></i></div>
+                                                    <div>
+                                                        <span class="meta-label">Email Address</span>
+                                                        <p class="meta-value text-white">
+                                                            <%= user.email %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-4">
+                                                <div class="meta-field-box">
+                                                    <div class="icon-avatar-tint info-tint"><i class="bi bi-phone"></i>
+                                                    </div>
+                                                    <div>
+                                                        <span class="meta-label">Mobile Number</span>
+                                                        <p class="meta-value text-white">
+                                                            <%= user.mobile %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-4">
+                                                <div class="meta-field-box">
+                                                    <div class="icon-avatar-tint info-tint"><i
+                                                            class="bi bi-gender-ambiguous"></i></div>
+                                                    <div>
+                                                        <span class="meta-label">Gender Identity</span>
+                                                        <p class="meta-value text-white">
+                                                            <%= user.gender || "N/A" %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-4">
+                                                <div class="meta-field-box">
+                                                    <div class="icon-avatar-tint info-tint"><i
+                                                            class="bi bi-calendar"></i></div>
+                                                    <div>
+                                                        <span class="meta-label">Date of Birth</span>
+                                                        <p class="meta-value text-white">
+                                                            <%= user.dob ? user.dob.toDateString() : "N/A" %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-4">
+                                                <div class="meta-field-box">
+                                                    <div class="icon-avatar-tint info-tint"><i class="bi bi-book"></i>
+                                                    </div>
+                                                    <div>
+                                                        <span class="meta-label">Education Background</span>
+                                                        <p class="meta-value text-white">
+                                                            <%= user.education || "N/A" %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-4">
+                                                <div class="meta-field-box">
+                                                    <div class="icon-avatar-tint info-tint"><i
+                                                            class="bi bi-briefcase"></i></div>
+                                                    <div>
+                                                        <span class="meta-label">Current Occupation</span>
+                                                        <p class="meta-value text-white">
+                                                            <%= user.occupation || "N/A" %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Full Width Details Section -->
+                                            <div class="col-md-12 mb-4">
+                                                <div class="meta-field-box w-100">
+                                                    <div class="icon-avatar-tint info-tint"><i
+                                                            class="bi bi-geo-alt"></i></div>
+                                                    <div class="flex-grow-1">
+                                                        <span class="meta-label">Residential Address</span>
+                                                        <p class="meta-value text-white">
+                                                            <%= user.address || "N/A" %>
+                                                        </p>
+
+                                                        <!-- Nested Postal Location Badging blocks -->
+                                                        <div class="d-flex flex-wrap gap-2 mt-2 pt-1">
+                                                            <span class="badge badge-nested-geo"><strong>City:</strong>
+                                                                <%= user.city || "N/A" %>
+                                                            </span>
+                                                            <span class="badge badge-nested-geo"><strong>State:</strong>
+                                                                <%= user.state || "N/A" %>
+                                                            </span>
+                                                            <span
+                                                                class="badge badge-nested-geo"><strong>Pincode:</strong>
+                                                                <%= user.pincode || "N/A" %>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 mb-4">
+                                                <div class="meta-field-box w-100">
+                                                    <div class="icon-avatar-tint info-tint"><i class="bi bi-star"></i>
+                                                    </div>
+                                                    <div>
+                                                        <span class="meta-label">Personal Hobbies</span>
+                                                        <p class="meta-value text-white">
+                                                            <%= user.hobbies && user.hobbies.length ?
+                                                                user.hobbies.join(", ") : " N/A" %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 mb-2">
+                                                <div class="meta-field-box w-100">
+                                                    <div class="icon-avatar-tint info-tint"><i
+                                                            class="bi bi-calendar-check"></i></div>
+                                                    <div>
+                                                        <span class="meta-label">Framework Registration / Joining
+                                                            Date</span>
+                                                        <p class="meta-value text-white font-weight-500">
+                                                            <%= user.createdAt.toDateString() %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Back Navigation Options -->
+                                        <div class="d-flex align-items-center justify-content-start mt-5 px-lg-3">
+                                            <a href="/users" class="btn back-dashboard-btn px-4">
+                                                <i class="bi bi-arrow-left-short" style="font-size: 1.2rem;"></i> Back
+                                                to Registry Index
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+            </div>
+    </div>
+
+
+    <style>
+
+        .main-content-wrapper {
+            margin-left: 260px;
+            min-height: 100vh;
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        .custom-profile-badge-success {
+            background-color: rgba(0, 242, 195, 0.15) !important;
+            color: #00f2c3 !important;
+            border: 1px solid rgba(0, 242, 195, 0.25);
+            padding: 8px 20px !important;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-profile-badge-danger {
+            background-color: rgba(253, 93, 147, 0.15) !important;
+            color: #fd5d93 !important;
+            border: 1px solid rgba(253, 93, 147, 0.25);
+            padding: 8px 20px !important;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Modern Minimal Card Element Box Blocks */
+        .meta-field-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background-color: #1f2031;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            height: 100%;
+        }
+
+        .icon-avatar-tint {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .info-tint {
+            background-color: rgba(108, 93, 211, 0.12);
+            color: #6c5dd3;
+        }
+
+        .meta-label {
+            display: block;
+            color: #9a9a9a;
+            font-size: 0.78rem;
+            text-uppercase: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .meta-value {
+            margin-bottom: 0;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
+        .badge-nested-geo {
+            background-color: rgba(255, 255, 255, 0.04) !important;
+            color: #b3b3cc !important;
+            padding: 6px 12px !important;
+            font-weight: 400;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* Navigation Action Buttons Overrides */
+        .back-dashboard-btn {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #b3b3cc !important;
+            border-radius: 10px;
+            font-weight: 500;
+            padding: 10px 22px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .back-dashboard-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff !important;
+            transform: translateX(-2px);
+        }
+
+        /* Handle Toggle Collapse Animations seamlessly */
+        .sidebar.collapsed {
+            transform: translateX(-260px);
+            margin-right: -260px;
+        }
+
+        .main-content-wrapper.expanded {
+            margin-left: 0px;
+        }
+
+        .font-weight-500 {
+            font-weight: 500;
+        }
+    </style>
